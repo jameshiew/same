@@ -27,6 +27,9 @@ func GetDifferent(ctx context.Context, from string) ([]string, error) {
 
 	var same []string
 	for _, brnch := range brnchs {
+		if brnch == from {
+			continue // don't include branch we are diffing against
+		}
 		err := exec.CommandContext(ctx, "git", "diff", from+".."+brnch, "--exit-code").Run()
 		if err != nil {
 			exitErr, ok := err.(*exec.ExitError)
