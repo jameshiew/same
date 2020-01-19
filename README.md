@@ -12,5 +12,5 @@ go get -v github.com/jameshiew/same
 Useful for piping into `xargs` for executing further Git commands e.g.
 
 ```shell script
-./same | xargs git show-branch
+same | xargs git show-branch
 ```
