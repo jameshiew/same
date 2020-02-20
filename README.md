@@ -5,7 +5,7 @@ This includes branches which may have at one point been different to master, but
 
 ## Installation
 ```shell script
-go get github.com/jameshiew/same
+go get github.com/jameshiew/same  # requires Go 1.13+
 ```
 
 ## Usage
