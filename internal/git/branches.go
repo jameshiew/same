@@ -12,7 +12,10 @@ import (
 func getBranchNames(ctx context.Context) ([]string, error) {
 	output, err := exec.CommandContext(ctx, "git", "for-each-ref", "refs/heads", "--format=%(refname:short)").CombinedOutput()
 	if err != nil {
-		return nil, fmt.Errorf("executing git command (output=%s): %v", output, err)
+		if len(output) > 0 {
+			log.Debugf("Output for `git for-each-ref` error: %s", output)
+		}
+		return nil, fmt.Errorf("executing git for-each-ref: %v", err)
 	}
 	// TrimRight to prevent an empty git name in the final slice of git names
 	return strings.Split(strings.TrimRight(string(output), " \n"), "\n"), nil
