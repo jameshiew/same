@@ -26,7 +26,7 @@ func GetSameBranchNames(ctx context.Context, from string) ([]string, error) {
 	if err != nil {
 		return nil, fmt.Errorf("getting branch names: %w", err)
 	}
-	log.Printf("%d branches: %v", len(brnchs), brnchs)
+	log.Infof("%d branches: %v", len(brnchs), brnchs)
 
 	var same []string
 	for _, brnch := range brnchs {
@@ -42,11 +42,11 @@ func GetSameBranchNames(ctx context.Context, from string) ([]string, error) {
 			if exitErr.ExitCode() > 1 {
 				return nil, fmt.Errorf("diffing git %s: output was %s - %w", brnch, exitErr.Stderr, exitErr)
 			}
-			log.Printf("Branch %s is different", brnch)
+			log.Infof("Branch %s is different", brnch)
 			continue
 		}
 		same = append(same, brnch)
 	}
-	log.Printf("%d branches same as %s: %v", len(same), from, same)
+	log.Infof("%d branches same as %s: %v", len(same), from, same)
 	return same, nil
 }
