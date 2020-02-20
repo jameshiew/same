@@ -7,7 +7,7 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
-	"github.com/jameshiew/same/internal/branch"
+	"github.com/jameshiew/same/internal/git"
 )
 
 const (
@@ -24,11 +24,11 @@ var rootCmd = &cobra.Command{
 	Short: docstring,
 	Long:  docstring + " - homepage is " + homepage,
 	Run: func(cmd *cobra.Command, args []string) {
-		different, err := branch.GetDifferent(context.Background(), "master")
+		same, err := git.GetSameBranchNames(context.Background(), "master")
 		if err != nil {
 			log.Fatalf("Error: %v", err)
 		}
-		for _, br := range different {
+		for _, br := range same {
 			fmt.Println(br)
 		}
 	},
