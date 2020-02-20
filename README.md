@@ -22,3 +22,9 @@ same | xargs git show-branch
 ```shell script
 same | xargs git branch -D
 ```
+
+### With DEBUG loggin
+
+```shell script
+SAME_LOG_LEVEL=DEBUG same  # log level passed via an environment variable
+```

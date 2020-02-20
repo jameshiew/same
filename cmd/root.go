@@ -34,14 +34,21 @@ var rootCmd = &cobra.Command{
 	},
 }
 
-func Execute(version string) {
+func Execute(version string, logLevel string) {
+	lvl, err := log.ParseLevel(logLevel)
+	if lvl == 0 {
+		lvl = log.WarnLevel
+	}
+	log.SetLevel(lvl)
+	if err != nil {
+		log.Warnf("Error parsing log level: %v", err)
+	}
 	rootCmd.Version = version
 	if err := rootCmd.Execute(); err != nil {
-		log.Fatalf("Error: %v", err)
+		log.Fatalf("Error running: %v", err)
 	}
 }
 
 func init() {
 	rootCmd.SetVersionTemplate(versionTemplate)
-	log.SetLevel(log.WarnLevel) // TODO make configurable via a flag
 }
