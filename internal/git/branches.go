@@ -21,6 +21,7 @@ func getBranchNames(ctx context.Context) ([]string, error) {
 	return strings.Split(strings.TrimRight(string(output), " \n"), "\n"), nil
 }
 
+// GetSameBranchNames returns a list of branch names for this repository which have no diff with branch `from`
 func GetSameBranchNames(ctx context.Context, from string) ([]string, error) {
 	brnchs, err := getBranchNames(ctx)
 	if err != nil {
