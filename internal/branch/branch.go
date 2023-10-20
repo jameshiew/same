@@ -18,7 +18,8 @@ func get(ctx context.Context) ([]string, error) {
 	return strings.Split(strings.TrimRight(string(output), " \n"), "\n"), nil
 }
 
-func GetDifferent(ctx context.Context, from string) ([]string, error) {
+// GetSame returns the names of branches which have no diff against the from branch
+func GetSame(ctx context.Context, from string) ([]string, error) {
 	brnchs, err := get(ctx)
 	if err != nil {
 		return nil, err
