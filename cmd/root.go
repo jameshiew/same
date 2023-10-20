@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"context"
 	"fmt"
 
 	log "github.com/sirupsen/logrus"
@@ -24,7 +23,7 @@ var rootCmd = &cobra.Command{
 	Short: docstring,
 	Long:  docstring + " - homepage is " + homepage,
 	Run: func(cmd *cobra.Command, args []string) {
-		same, err := branch.GetSame(context.Background(), "master")
+		same, err := branch.GetSame(cmd.Context(), "master")
 		if err != nil {
 			log.Fatalf("Error: %v", err)
 		}
